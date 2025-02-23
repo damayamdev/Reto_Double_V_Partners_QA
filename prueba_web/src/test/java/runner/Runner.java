@@ -13,11 +13,8 @@ import pages.BasePage;
         glue = {"steps"},
         plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:","json:target/cucumber-reports.json"},
         monochrome = true,
-        tags = "@Compra"
+        tags = "@Login"
 )
 public class Runner {
-    @AfterClass
-    public static void cleanDriver(){
-        BasePage.closeBrowser();
-    }
+
 }

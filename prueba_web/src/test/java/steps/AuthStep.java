@@ -5,13 +5,20 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import pages.OpencartPage;
 import java.util.List;
 import java.util.Map;
 
 public class AuthStep {
 
-    OpencartPage opencartPage = new OpencartPage();
+    private WebDriver driver;
+    private OpencartPage opencartPage;
+
+    public AuthStep(Hooks hooks) {
+        this.driver = hooks.getDriver();
+        this.opencartPage = new OpencartPage(driver);
+    }
 
     @Given("que estoy en la página de registro")
     public void que_estoy_en_la_pagina_de_registro() {

@@ -1,5 +1,7 @@
 package pages;
 
+import org.openqa.selenium.WebDriver;
+
 import java.util.Stack;
 
 public class OpencartPage extends BasePage{
@@ -18,6 +20,11 @@ public class OpencartPage extends BasePage{
     private static final String BTN_CONTINUAR = "//input[@value='Continue']";
     private static final String BTN_LOGIN = "//input[@value='Login']";
     private static final String CHECKBOX_AGREE = "//input[@name='agree']";
+
+    public OpencartPage(WebDriver driver) {
+        super(driver);
+    }
+
 
     private String firsResult (String text){
         return "//p[contains(text(),'"+text+"')]";
@@ -59,9 +66,7 @@ public class OpencartPage extends BasePage{
     private static final String ADDRESS = "//input[@name=\"payment_address\"]";
 
 
-    public OpencartPage() {
-        super(driver);
-    }
+
 
     public void navigateTo(){
         navigateTo("https://opencart.abstracta.us/");

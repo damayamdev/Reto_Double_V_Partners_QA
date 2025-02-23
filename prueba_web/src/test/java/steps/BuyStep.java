@@ -4,11 +4,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import pages.OpencartPage;
 
 public class BuyStep {
 
-    OpencartPage opencartPage = new OpencartPage();
+    private WebDriver driver;
+    private OpencartPage opencartPage;
+
+    public BuyStep(Hooks hooks) {
+        this.driver = hooks.getDriver();
+        this.opencartPage = new OpencartPage(driver);
+    }
 
     @Given("que Daniel inició sesión en la página Opencart {string} {string}")
     public void que_daniel_inicio_sesion_en_la_pagina_opencart(String usuario, String password) {
