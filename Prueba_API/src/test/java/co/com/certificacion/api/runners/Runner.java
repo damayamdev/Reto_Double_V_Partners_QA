@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         features = "src/test/resources/features/",
-        tags = "@actualizarProducto",
+        tags = "@endpointProductos",
         glue = {
                 "co.com.certificacion.api.stepdefinitions.hook",
                 "co.com.certificacion.api.stepdefinitions"

@@ -1,5 +1,6 @@
 #Autor: Daniel Amaya Marín
 
+  @endpointProductos
 Feature: Gestión de productos en la tienda "Your Store"
 
   @consultarProductosPorCategoriaElectronics
@@ -41,4 +42,9 @@ Feature: Gestión de productos en la tienda "Your Store"
     Examples: Table
       | imagen                       |
       | http://ejemplo.com/nueva-img |
-      
+
+    @EliminarProducto
+  Scenario: Eliminar los productos con valor menor a 100
+  Given que consulto todos los productos con la petición GET a "/products"
+  When para cada producto filtrado realizo una petición DELETE a "/products/"
+  Then todas las respuestas DELETE deberían tener código 200

@@ -3,11 +3,9 @@ package co.com.certificacion.api.stepdefinitions;
 import co.com.certificacion.api.exceptions.AssertionsServices;
 import co.com.certificacion.api.models.Product;
 import co.com.certificacion.api.questions.*;
-import co.com.certificacion.api.tasks.ActualizarImagen;
-import co.com.certificacion.api.tasks.CrearProducto;
-import co.com.certificacion.api.tasks.ListarProductoXId;
-import co.com.certificacion.api.tasks.ListarTodosLosProductos;
+import co.com.certificacion.api.tasks.*;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.actors.OnStage;
@@ -135,5 +133,29 @@ public class ProductosStepdefinition {
                         AssertionsServices.LOS_DATOS_DE_LA_RESPUESTA_NO_SON_LOS_CORRECTOS)
         );
     }
+
+    @Given("que consulto todos los productos con la petición GET a {string}")
+    public void queConsultoTodosLosProductosConLaPeticiónGETA(String endpoint) {
+        theActorInTheSpotlight().wasAbleTo(
+                ListarTodosLosProductos.get(endpoint)
+        );
+    }
+
+    @When("para cada producto filtrado realizo una petición DELETE a {string}")
+    public void paraCadaProductoFiltradoRealizoUnaPeticiónDELETEA(String endpoint) {
+        theActorInTheSpotlight().attemptsTo(
+                EliminarPorCondicion.eliminar(endpoint)
+        );
+    }
+
+    @Then("todas las respuestas DELETE deberían tener código {int}")
+    public void todasLasRespuestasDELETEDeberíanTenerCódigo(Integer codigo) {
+        theActorInTheSpotlight()
+                .should(seeThat(ValidarRespuestaEstado.expected(codigo))
+                        .orComplainWith(AssertionsServices.class,
+                                AssertionsServices.NO_SE_ESPERA_LA_RESPUESTA_DE_LOS_SERVICIOS_DE_CÓDIGO_DE_ESTADO)
+                );
+    }
+
 
 }

@@ -1,24 +1,16 @@
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'java-library'
-apply plugin: "net.serenity-bdd.serenity-gradle-plugin"
+plugins {
+    id 'java'
+    id 'application'
+    id 'java-library'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.0.27'
+}
 
 repositories {
     mavenCentral()
     mavenLocal()
 }
 
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
 
-    dependencies {
-        classpath "net.serenity-bdd:serenity-gradle-plugin:4.0.27"
-    }
-}
 
 ext {
     serenityVersion = '4.0.28'
@@ -37,4 +29,14 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:2.0.6'
     testImplementation 'org.slf4j:slf4j-simple:2.0.6'
     implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.3.3'
+}
+
+serenity {
+    reports = ["single-page-html"]
+}
+
+test {
+    systemProperties System.getProperties()
+    testLogging.showStandardStreams = true
+    finalizedBy(aggregate)
 }
