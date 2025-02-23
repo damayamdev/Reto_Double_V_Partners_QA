@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group = 'prueba selenium'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'junit:junit:4.13.1'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.28.1'
+    implementation 'io.cucumber:cucumber-java:7.11.1'
+    testImplementation 'io.cucumber:cucumber-junit:7.11.1'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.7'
+    // https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter
+    implementation 'tech.grasshopper:extentreports-cucumber7-adapter:1.14.0'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.11.0'
+}
+
+test {
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+}
